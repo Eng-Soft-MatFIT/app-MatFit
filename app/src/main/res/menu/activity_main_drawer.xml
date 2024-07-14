@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_alunos"
+            android:icon="@drawable/ic_people"
+            android:title="@string/textAlunos" />
+        <item
+            android:id="@+id/nav_funcionarios"
+            android:icon="@drawable/ic_funcionario"
+            android:title="@string/textFuncionarios" />
+        <item
+            android:id="@+id/nav_equipamentos"
+            android:icon="@drawable/ic_equipamento"
+            android:title="@string/textEquipamentos" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_logout"
+            android:title="@string/exit" />
+    </group>
+
+</menu>

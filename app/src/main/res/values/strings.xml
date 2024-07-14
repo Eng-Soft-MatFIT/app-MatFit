@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">Gerenciador de Academia</string>
+
+    <string name="ERROR_UNEXPECTED">Um erro inesperado ocorreu. Tente novamente mais tarde.</string>
+    <string name="ERROR_LOAD_TASK">Erro ao carregar a tarefa.</string>
+    <string name="ERROR_INTERNET_CONNECTION">Conexão à internet necessária para uso da applicação.</string>
+
+    <string name="task_updated">Tarefa atualizada com sucesso!</string>
+    <string name="task_created">Tarefa criada com sucesso!</string>
+    <string name="task_removed">Tarefa removida com sucesso!</string>
+
+    <string name="email">E-mail</string>
+    <string name="password">Senha</string>
+    <string name="login">Login</string>
+    <string name="name">Nome</string>
+    <string name="register">Cadastrar</string>
+    <string name="description">Descrição</string>
+    <string name="priority">Prioridade</string>
+    <string name="due_date">Data Limite</string>
+    <string name="update_task">Atualizar tarefa</string>
+    <string name="click_to_select">Clique para selecionar a data limite</string>
+    <string name="complete">Completa</string>
+    <string name="add_task">Adicionar tarefa</string>
+    <string name="yes">Sim</string>
+    <string name="cancel">Cancelar</string>
+    <string name="remove_task">Remoção de tarefa</string>
+    <string name="text_remove_task">Tem certeza que deseja remover essa tarefa?</string>
+    <string name="text_not_account">Não tem uma conta?</string>
+    <string name="text_register">Cadastre-se</string>
+    <string name="enter">Entrar</string>
+    <string name="exit">Sair</string>
+    <string name="expired">Expiradas</string>
+    <string name="all_tasks">Tarefas</string>
+    <string name="next_days">Próximos 7 dias</string>
+    <string name="text_user_name">NOME USUÁRIO</string>
+    <string name="textAlunos">Alunos</string>
+    <string name="textFuncionarios">Funcionários</string>
+    <string name="textEquipamentos">Equipamentos</string>
+
+</resources>
