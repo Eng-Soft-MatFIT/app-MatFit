@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Gerenciador de Academia</string>
+    <string name="app_name">MatFit</string>
 
     <string name="ERROR_UNEXPECTED">Um erro inesperado ocorreu. Tente novamente mais tarde.</string>
     <string name="ERROR_LOAD_TASK">Erro ao carregar a tarefa.</string>

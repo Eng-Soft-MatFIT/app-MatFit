@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_all_tasks">
+    app:startDestination="@+id/nav_alunos">
 
     <fragment
-        android:id="@+id/nav_all_tasks"
+        android:id="@+id/nav_alunos"
         android:name="com.devmasterteam.tasks.view.AllTasksFragment"
-        android:label="@string/all_tasks"
-        tools:layout="@layout/fragment_all_tasks">
+        android:label="@string/textAlunos"
+        tools:layout="@layout/fragment_alunos">
         <argument
             android:name="taskfilter"
             android:defaultValue="0"
@@ -17,10 +17,10 @@
     </fragment>
 
     <fragment
-        android:id="@+id/nav_next_tasks"
+        android:id="@+id/nav_funcionarios"
         android:name="com.devmasterteam.tasks.view.AllTasksFragment"
-        android:label="@string/next_days"
-        tools:layout="@layout/fragment_all_tasks">
+        android:label="@string/textFuncionarios"
+        tools:layout="@layout/fragment_alunos">
         <argument
             android:name="taskfilter"
             android:defaultValue="1"
@@ -28,10 +28,10 @@
     </fragment>
 
     <fragment
-        android:id="@+id/nav_expired"
+        android:id="@+id/nav_equipamentos"
         android:name="com.devmasterteam.tasks.view.AllTasksFragment"
-        android:label="@string/expired"
-        tools:layout="@layout/fragment_all_tasks">
+        android:label="@string/textEquipamentos"
+        tools:layout="@layout/fragment_alunos">
         <argument
             android:name="taskfilter"
             android:defaultValue="2"

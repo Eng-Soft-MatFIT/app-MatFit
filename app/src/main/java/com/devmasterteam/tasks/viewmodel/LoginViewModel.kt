@@ -7,10 +7,8 @@ import androidx.lifecycle.MutableLiveData
 import com.devmasterteam.tasks.service.constants.TaskConstants
 import com.devmasterteam.tasks.service.listener.APIListener
 import com.devmasterteam.tasks.service.model.PersonModel
-import com.devmasterteam.tasks.service.model.PriorityModel
 import com.devmasterteam.tasks.service.model.ValidationModel
 import com.devmasterteam.tasks.service.repository.PersonRepository
-import com.devmasterteam.tasks.service.repository.PriorityRepository
 import com.devmasterteam.tasks.service.repository.SecurityPreferences
 import com.devmasterteam.tasks.service.repository.remote.RetrofitClient
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,7 +19,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
     // Instancias
     private val personRepository = PersonRepository(application.applicationContext)
     private val securityPreferences = SecurityPreferences(application.applicationContext)
-    private val priorityRepository = PriorityRepository(application.applicationContext)
+  //   private val priorityRepository = PriorityRepository(application.applicationContext)
 
     // Variáveis a serem observadas
     private val _login = MutableLiveData<ValidationModel>()
@@ -56,16 +54,16 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
         val logged = (token != "" && person != "")
         _loggedUser.value = logged
 
-        if (!logged) {
-            priorityRepository.list(object : APIListener<List<PriorityModel>> {
-                override fun onSuccess(result: List<PriorityModel>) {
-                    priorityRepository.save(result)
-                }
-
-                override fun onFailure(message: String) {
-                    val s = message
-                }
-            })
-        }
+//        if (!logged) {
+//            priorityRepository.list(object : APIListener<List<PriorityModel>> {
+//                override fun onSuccess(result: List<PriorityModel>) {
+//                    priorityRepository.save(result)
+//                }
+//
+//                override fun onFailure(message: String) {
+//                    val s = message
+//                }
+//            })
+//        }
     }
 }

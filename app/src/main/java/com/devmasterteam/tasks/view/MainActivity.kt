@@ -42,7 +42,10 @@ class MainActivity : AppCompatActivity() {
 
         // Click do botão flutuante
         binding.appBarMain.fab.setOnClickListener {
-            startActivity(Intent(applicationContext, TaskFormActivity::class.java))
+            /* todo ->
+                click do botão flutuante, logica para que seja executado e ir para as telas certas
+            * */
+          //  startActivity(Intent(applicationContext, TaskFormActivity::class.java))
         }
 
         // Navegação
@@ -67,7 +70,7 @@ class MainActivity : AppCompatActivity() {
         val navView: NavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.nav_all_tasks, R.id.nav_next_tasks, R.id.nav_expired),
+            setOf(R.id.nav_alunos, R.id.nav_funcionarios, R.id.nav_equipamentos),
             drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
