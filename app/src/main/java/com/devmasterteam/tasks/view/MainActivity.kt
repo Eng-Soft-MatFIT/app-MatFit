@@ -76,9 +76,17 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+        // TODO - GERENCIA DO ID DA NAVEGAÇÃO
         navView.setNavigationItemSelectedListener {
+
+//            if (it.itemId == R.id.nav_alunos){
+//                startActivity(Intent(applicationContext, MainActivity::class.java))
+//                       }
+//            if (it.itemId == R.id.nav_alunos)
+//            if (it.itemId == R.id.nav_alunos)
+
             if (it.itemId == R.id.nav_logout)
-                logout()
+                    logout()
             else {
                 NavigationUI.onNavDestinationSelected(it, navController)
                 drawerLayout.closeDrawer(GravityCompat.START)
