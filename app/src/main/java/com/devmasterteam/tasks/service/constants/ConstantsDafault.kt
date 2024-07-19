@@ -3,7 +3,7 @@ package com.devmasterteam.tasks.service.constants
 /**
  * Constantes usadas na aplicação
  */
-class TaskConstants private constructor() {
+class ConstantsDafault private constructor() {
 
     // SharedPreferences
     object SHARED {
