@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.devmasterteam.tasks.service.constants.TaskConstants
+import com.devmasterteam.tasks.service.constants.ConstantsDafault
 import com.devmasterteam.tasks.service.model.ValidationModel
 import com.devmasterteam.tasks.service.repository.SecurityPreferences
 import com.devmasterteam.tasks.service.repository.remote.RetrofitClient
@@ -27,8 +27,8 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
 
     // Verifica se usuário está logado
     fun verifyLoggedUser() {
-        val token = securityPreferences.get(TaskConstants.SHARED.TOKEN_KEY)
-        val person = securityPreferences.get(TaskConstants.SHARED.PERSON_KEY)
+        val token = securityPreferences.get(ConstantsDafault.SHARED.TOKEN_KEY)
+        val person = securityPreferences.get(ConstantsDafault.SHARED.PERSON_KEY)
         RetrofitClient.addHeaders(token, person)
 
         val logged = (token != "" && person != "")
