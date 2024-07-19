@@ -1,4 +1,4 @@
-package com.devmasterteam.tasks.view
+package com.devmasterteam.tasks.view.ui
 
 import android.content.Intent
 import android.os.Bundle
