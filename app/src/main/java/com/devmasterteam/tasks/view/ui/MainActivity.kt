@@ -1,4 +1,4 @@
-package com.devmasterteam.tasks.view
+package com.devmasterteam.tasks.view.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -18,7 +18,11 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.devmasterteam.tasks.R
 import com.devmasterteam.tasks.databinding.ActivityMainBinding
-import com.devmasterteam.tasks.viewmodel.MainViewModel
+import com.devmasterteam.tasks.service.constants.TaskConstants
+import com.devmasterteam.tasks.view.ui.alunos.AlunosFragment
+import com.devmasterteam.tasks.view.ui.equipamentos.EquipamentosFragment
+import com.devmasterteam.tasks.view.ui.funcionarios.FuncionariosFragment
+import com.devmasterteam.tasks.view.ui.viewmodel.MainViewModel
 import com.google.android.material.navigation.NavigationView
 import kotlinx.coroutines.launch
 
@@ -27,6 +31,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: MainViewModel
+
+    private var filter = TaskConstants.FILTER.ALL
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +48,7 @@ class MainActivity : AppCompatActivity() {
 
         // Click do botão flutuante
         binding.appBarMain.fab.setOnClickListener {
+
             /* todo ->
                 click do botão flutuante, logica para que seja executado e ir para as telas certas
             * */
@@ -79,17 +86,15 @@ class MainActivity : AppCompatActivity() {
         // TODO - GERENCIA DO ID DA NAVEGAÇÃO
         navView.setNavigationItemSelectedListener {
 
-//            if (it.itemId == R.id.nav_alunos){
-//                startActivity(Intent(applicationContext, MainActivity::class.java))
-//                       }
-//            if (it.itemId == R.id.nav_alunos)
-//            if (it.itemId == R.id.nav_alunos)
-
-            if (it.itemId == R.id.nav_logout)
-                    logout()
-            else {
-                NavigationUI.onNavDestinationSelected(it, navController)
-                drawerLayout.closeDrawer(GravityCompat.START)
+            when (it.itemId) {
+//                R.id.nav_alunos -> startActivity(Intent(applicationContext, AlunosFragment::class.java))
+//                R.id.nav_alunos -> startActivity(Intent(applicationContext, FuncionariosFragment::class.java))
+//                R.id.nav_alunos -> startActivity(Intent(applicationContext, EquipamentosFragment::class.java))
+                R.id.nav_logout -> logout()
+                else -> {
+                    NavigationUI.onNavDestinationSelected(it, navController)
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                }
             }
             true
         }

@@ -1,4 +1,4 @@
-package com.devmasterteam.tasks.view
+package com.devmasterteam.tasks.view.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,7 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.devmasterteam.tasks.R
 import com.devmasterteam.tasks.databinding.ActivityLoginBinding
-import com.devmasterteam.tasks.viewmodel.LoginViewModel
+import com.devmasterteam.tasks.view.ui.viewmodel.LoginViewModel
 import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {

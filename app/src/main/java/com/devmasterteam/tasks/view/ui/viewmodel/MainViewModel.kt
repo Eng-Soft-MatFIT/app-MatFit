@@ -1,4 +1,4 @@
-package com.devmasterteam.tasks.viewmodel
+package com.devmasterteam.tasks.view.ui.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
