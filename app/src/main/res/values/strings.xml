@@ -12,8 +12,6 @@
     <string name="email">E-mail</string>
     <string name="password">Senha</string>
     <string name="login">Login</string>
-    <string name="name">Nome</string>
-    <string name="register">Cadastrar</string>
     <string name="description">Descrição</string>
     <string name="priority">Prioridade</string>
     <string name="due_date">Data Limite</string>
@@ -21,8 +19,6 @@
     <string name="click_to_select">Clique para selecionar a data limite</string>
     <string name="complete">Completa</string>
     <string name="add_task">Adicionar tarefa</string>
-    <string name="yes">Sim</string>
-    <string name="cancel">Cancelar</string>
     <string name="remove_task">Remoção de tarefa</string>
     <string name="text_remove_task">Tem certeza que deseja remover essa tarefa?</string>
     <string name="text_not_account">Não tem uma conta?</string>
@@ -36,5 +32,38 @@
     <string name="textAlunos">Alunos</string>
     <string name="textFuncionarios">Funcionários</string>
     <string name="textEquipamentos">Equipamentos</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name="textRegister">Cadastrar aluno</string>
+    <string name="textUpdate">Atualizar aluno</string>
+    <string name="cpf">CPF</string>
+    <string name="name">Nome</string>
+    <string name="sport">Esporte</string>
+    <string name="day">Dia</string>
+    <string name="register">Cadastrar</string>
+    <string name="update">Atualizar</string>
+    <string name="textErrorCpf">CPF inválido</string>
+    <string name="textErrorName">Insira um nome válido</string>
+    <string name="textErrorSport">Insira um esporte válido</string>
+    <string name="textErrorDay">Insira um dia válido</string>
+    <string name="textErrorCpfExistent">CPF já está cadastrado!</string>
+    <string name="textSucessRegister">Aluno cadastrado com sucesso!</string>
+    <string name="textSucessUpdated">Aluno atualizado com sucesso!</string>
+    <string name="textCardName">Aluno: </string>
+    <string name="textCardSport">Esporte: </string>
+    <string name="textCardDay">Dia do pagamento: </string>
+    <string name="textTotalRegisted">Alunos cadastrados:</string>
+    <string name="textResultRegisted">0</string>
+    <string name="deleteAluno">Excluir aluno</string>
+    <string name="textConfirmationDelete">Tem certeza que deseja excluir este aluno?</string>
+    <string name="yes">Sim</string>
+    <string name="cancel">Cancelar</string>
+    <string name="cpfNotFound">cpf not found</string>
+    <string name="nameNotFound">name not found</string>
+    <string name="sportNotFound">sport not found</string>
+    <string name="dayNotFound">day not found</string>
+    <string name="unlockPhone">Desbloqueie seu celular</string>
 
 </resources>
