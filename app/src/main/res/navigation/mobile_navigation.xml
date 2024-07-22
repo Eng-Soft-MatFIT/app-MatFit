@@ -7,35 +7,20 @@
 
     <fragment
         android:id="@+id/nav_alunos"
-        android:name="com.devmasterteam.tasks.view.AllTasksFragment"
+        android:name="com.devmasterteam.tasks.view.ui.alunos.AlunosFragment"
         android:label="@string/textAlunos"
         tools:layout="@layout/fragment_alunos">
-        <argument
-            android:name="taskfilter"
-            android:defaultValue="0"
-            app:argType="integer" />
     </fragment>
-
     <fragment
         android:id="@+id/nav_funcionarios"
-        android:name="com.devmasterteam.tasks.view.AllTasksFragment"
+        android:name="com.devmasterteam.tasks.view.ui.funcionarios.FuncionariosFragment"
         android:label="@string/textFuncionarios"
-        tools:layout="@layout/fragment_alunos">
-        <argument
-            android:name="taskfilter"
-            android:defaultValue="1"
-            app:argType="integer" />
+        tools:layout="@layout/fragment_funcionarios">
     </fragment>
-
     <fragment
         android:id="@+id/nav_equipamentos"
-        android:name="com.devmasterteam.tasks.view.AllTasksFragment"
+        android:name="com.devmasterteam.tasks.view.ui.equipamentos.EquipamentosFragment"
         android:label="@string/textEquipamentos"
-        tools:layout="@layout/fragment_alunos">
-        <argument
-            android:name="taskfilter"
-            android:defaultValue="2"
-            app:argType="integer" />
+        tools:layout="@layout/fragment_equipamentos">
     </fragment>
-
 </navigation>
