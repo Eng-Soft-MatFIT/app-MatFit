@@ -13,17 +13,15 @@ import com.devmasterteam.tasks.view.ui.viewmodel.AlunoViewModel
 class AlunosFragment : Fragment() {
 
     private lateinit var viewModel: AlunoViewModel
-    private var _binding: FragmentAlunosBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentAlunosBinding
 
 //    private val adapter = TaskAdapter()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, b: Bundle?): View {
 
         viewModel = ViewModelProvider(this)[AlunoViewModel::class.java]
-        _binding = FragmentAlunosBinding.inflate(inflater, container, false)
+        binding = FragmentAlunosBinding.inflate(inflater, container, false)
 
-        requireArguments().getInt(TaskConstants.BUNDLE.TASKFILTER,0)
 //
 //        binding.recyclerAllTasks.layoutManager = LinearLayoutManager(context)
 //        binding.recyclerAllTasks.adapter = adapter
@@ -47,11 +45,6 @@ class AlunosFragment : Fragment() {
 //        observe()
 
         return binding.root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     override fun onResume() {
