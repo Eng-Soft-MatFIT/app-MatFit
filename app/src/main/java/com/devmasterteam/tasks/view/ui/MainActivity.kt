@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
             /* todo ->
                 click do botão flutuante, logica para que seja executado e ir para as telas certas
             * */
-          //  startActivity(Intent(applicationContext, TaskFormActivity::class.java))
+            //  startActivity(Intent(applicationContext, TaskFormActivity::class.java))
         }
 
         // Navegação
@@ -87,9 +87,6 @@ class MainActivity : AppCompatActivity() {
         navView.setNavigationItemSelectedListener {
 
             when (it.itemId) {
-//                R.id.nav_alunos -> startActivity(Intent(applicationContext, AlunosFragment::class.java))
-//                R.id.nav_alunos -> startActivity(Intent(applicationContext, FuncionariosFragment::class.java))
-//                R.id.nav_alunos -> startActivity(Intent(applicationContext, EquipamentosFragment::class.java))
                 R.id.nav_logout -> logout()
                 else -> {
                     NavigationUI.onNavDestinationSelected(it, navController)
