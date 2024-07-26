@@ -5,7 +5,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import com.devmasterteam.tasks.R
-import com.devmasterteam.tasks.service.constants.TaskConstants
+import com.devmasterteam.tasks.service.constants.Constants
 import com.devmasterteam.tasks.service.listener.APIListener
 import com.google.gson.Gson
 import retrofit2.Call
@@ -21,7 +21,7 @@ open class BaseRepository(val context: Context) {
     fun <T> executeCall(call: Call<T>, listener: APIListener<T>) {
         call.enqueue(object : Callback<T> {
             override fun onResponse(call: Call<T>, response: Response<T>) {
-                if (response.code() == TaskConstants.HTTP.SUCCESS)
+                if (response.code() == Constants.HTTP.SUCCESS)
                     response.body()?.let { listener.onSuccess(it) }
                 else
                     listener.onFailure(failResponse(response.errorBody()!!.string()))
