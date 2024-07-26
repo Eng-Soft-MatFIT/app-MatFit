@@ -18,10 +18,6 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.devmasterteam.tasks.R
 import com.devmasterteam.tasks.databinding.ActivityMainBinding
-import com.devmasterteam.tasks.service.constants.TaskConstants
-import com.devmasterteam.tasks.view.ui.alunos.AlunosFragment
-import com.devmasterteam.tasks.view.ui.equipamentos.EquipamentosFragment
-import com.devmasterteam.tasks.view.ui.funcionarios.FuncionariosFragment
 import com.devmasterteam.tasks.view.ui.viewmodel.MainViewModel
 import com.google.android.material.navigation.NavigationView
 import kotlinx.coroutines.launch
@@ -32,7 +28,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: MainViewModel
 
-    private var filter = TaskConstants.FILTER.ALL
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,15 +40,6 @@ class MainActivity : AppCompatActivity() {
 
         // Adicionando as 3 barras de opção para a barra principal
         setSupportActionBar(binding.appBarMain.toolbar)
-
-        // Click do botão flutuante
-        binding.appBarMain.fab.setOnClickListener {
-
-            /* todo ->
-                click do botão flutuante, logica para que seja executado e ir para as telas certas
-            * */
-            //  startActivity(Intent(applicationContext, TaskFormActivity::class.java))
-        }
 
         // Navegação
         setupNavigation()
