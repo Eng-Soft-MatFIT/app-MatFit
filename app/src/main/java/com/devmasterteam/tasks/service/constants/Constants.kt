@@ -3,7 +3,7 @@ package com.devmasterteam.tasks.service.constants
 /**
  * Constantes usadas na aplicação
  */
-class TaskConstants private constructor() {
+class Constants private constructor() {
 
     // SharedPreferences
     object SHARED {
@@ -22,15 +22,17 @@ class TaskConstants private constructor() {
         const val SUCCESS = 200
     }
 
-    object BUNDLE {
-        const val TASKID = "taskid"
-        const val TASKFILTER = "taskfilter"
-    }
-
     object FILTER {
         const val ALL = 0
         const val NEXT = 1
         const val EXPIRED = 2
+    }
+
+    object Attributs {
+        const val CPF = "cpf"
+        const val NAME = "name"
+        const val SPORT = "sport"
+        const val DAY = "day"
     }
 
 }
