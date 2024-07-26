@@ -1,6 +1,6 @@
 package com.devmasterteam.tasks.service.repository.remote
 
-import com.devmasterteam.tasks.service.constants.TaskConstants
+import com.devmasterteam.tasks.service.constants.Constants
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -17,8 +17,8 @@ class RetrofitClient private constructor() {
             httpClient.addInterceptor { chain ->
                 val request = chain.request()
                     .newBuilder()
-                    .addHeader(TaskConstants.HEADER.TOKEN_KEY, token)
-                    .addHeader(TaskConstants.HEADER.PERSON_KEY, personKey)
+                    .addHeader(Constants.HEADER.TOKEN_KEY, token)
+                    .addHeader(Constants.HEADER.PERSON_KEY, personKey)
                     .build()
                 chain.proceed(request)
             }
