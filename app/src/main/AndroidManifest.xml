@@ -18,6 +18,12 @@
         <activity
             android:name=".view.ui.LoginActivity"
             android:exported="true" />
+        <activity
+            android:name=".view.ui.alunos.AddAlunoActivity"
+        android:exported="true" />
+        <activity
+            android:name=".view.ui.alunos.UpdateAlunoActivity"
+            android:exported="true" />
 
         <activity
             android:name=".view.ui.MainActivity"
