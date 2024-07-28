@@ -11,14 +11,13 @@ class RetrofitClient private constructor() {
         private lateinit var INSTANCE: Retrofit
         private var token: String = ""
         private var personKey: String = ""
+        private const val URL = "https://mat-fit.up.railway.app/"
 
         private fun getRetrofitInstance(): Retrofit {
             val httpClient = OkHttpClient.Builder()
             httpClient.addInterceptor { chain ->
                 val request = chain.request()
                     .newBuilder()
-                    .addHeader(Constants.HEADER.TOKEN_KEY, token)
-                    .addHeader(Constants.HEADER.PERSON_KEY, personKey)
                     .build()
                 chain.proceed(request)
             }
@@ -26,7 +25,7 @@ class RetrofitClient private constructor() {
             if (!::INSTANCE.isInitialized) {
                 synchronized(RetrofitClient::class) {
                     INSTANCE = Retrofit.Builder()
-                        .baseUrl("http://devmasterteam.com/CursoAndroidAPI/")
+                        .baseUrl(URL)
                         .client(httpClient.build())
                         .addConverterFactory(GsonConverterFactory.create())
                         .build()
@@ -37,11 +36,6 @@ class RetrofitClient private constructor() {
 
         fun <T> getService(serviceClass: Class<T>) : T {
             return getRetrofitInstance().create(serviceClass)
-        }
-
-        fun addHeaders(tokenValue: String, personKeyValue: String){
-            token = tokenValue
-            personKey = personKeyValue
         }
     }
 }
