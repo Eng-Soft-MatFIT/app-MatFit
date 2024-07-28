@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.devmasterteam.tasks.R
 import com.devmasterteam.tasks.databinding.FragmentAlunosBinding
-import com.devmasterteam.tasks.service.constants.Constants
 import com.devmasterteam.tasks.service.listener.OnAlunoListener
 import com.devmasterteam.tasks.view.adapter.AlunoAdapter
 import com.devmasterteam.tasks.view.ui.viewmodel.AlunoViewModel
@@ -31,6 +30,8 @@ class AlunosFragment : Fragment() {
         binding.recyclerListAlunos.layoutManager = LinearLayoutManager(context)
         // Adapter
         binding.recyclerListAlunos.adapter = adapter
+
+        clickable()
 
         val listener = object : OnAlunoListener{
             override fun onUpdate(cpf: String) {
@@ -73,5 +74,11 @@ class AlunosFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         //  viewModel.list( )
+    }
+
+    private fun clickable() {
+        binding.btnScreenAdd.setOnClickListener {
+            startActivity(Intent(context, AddAlunoActivity::class.java))
+        }
     }
 }
