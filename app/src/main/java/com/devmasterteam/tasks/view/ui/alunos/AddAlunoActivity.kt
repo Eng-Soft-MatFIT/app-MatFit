@@ -1,15 +1,14 @@
 package com.devmasterteam.tasks.view.ui.alunos
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import com.devmasterteam.tasks.R
 import com.devmasterteam.tasks.databinding.ActivityAddAlunoBinding
 import com.devmasterteam.tasks.service.model.Aluno
 import com.devmasterteam.tasks.view.ui.viewmodel.AlunoViewModel
+import java.time.LocalDate
 
 class AddAlunoActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddAlunoBinding
@@ -17,19 +16,15 @@ class AddAlunoActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         binding = ActivityAddAlunoBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
 
         // Criando viewModel
         viewModel = ViewModelProvider(this)[AlunoViewModel::class.java]
 
         clickable()
+
+        observer()
 
     }
 
@@ -49,8 +44,17 @@ class AddAlunoActivity : AppCompatActivity() {
         val cpf = binding.editCpf.text.toString()
         val name = binding.editName.text.toString()
         val sport = binding.editSport.text.toString()
-        val day = binding.editDay.text.toString()
-        if (viewModel.validation(applicationContext, Aluno(cpf, name, sport, day))) finish()
+        if (viewModel.saveAluno(applicationContext, Aluno(cpf, name, sport,"${LocalDate.now().plusMonths(1)}")))
+            finish()
         else return
+    }
+
+    private fun observer(){
+        viewModel.saveAluno.observe(this){
+            if (it.status())
+                Toast.makeText(applicationContext, R.string.textSucessRegister, Toast.LENGTH_SHORT).show()
+            else
+                Toast.makeText(applicationContext, it.message(), Toast.LENGTH_SHORT).show()
+        }
     }
 }
