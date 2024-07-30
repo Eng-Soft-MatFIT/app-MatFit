@@ -11,6 +11,7 @@ import com.devmasterteam.tasks.databinding.ActivityUpdateAlunoBinding
 import com.devmasterteam.tasks.service.constants.Constants
 import com.devmasterteam.tasks.service.model.Aluno
 import com.devmasterteam.tasks.view.ui.viewmodel.AlunoViewModel
+import java.time.LocalDate
 
 class UpdateAlunoActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUpdateAlunoBinding
@@ -37,7 +38,7 @@ class UpdateAlunoActivity : AppCompatActivity() {
     }
 
     // Eventos de clicks dos botões
-    private fun clickable(){
+    private fun clickable() {
         binding.buttonUpdate.setOnClickListener {
             doUpdate()
         }
@@ -51,24 +52,32 @@ class UpdateAlunoActivity : AppCompatActivity() {
     private fun doUpdate() {
         val name = binding.editName.text.toString()
         val sport = binding.editSport.text.toString()
-        val day = binding.editDay.text.toString()
-        if (viewModel.validation(applicationContext.applicationContext, Aluno(cpf, name, sport, day))) finish()
+     // todo - diferenciar salvar e atualizar
+        if (viewModel.saveAluno(applicationContext.applicationContext,
+                Aluno(cpf, name, sport,  "${LocalDate.now().plusMonths(1)}")))
+            finish()
         else return
     }
 
 
-  /* Responsável por receber os valores vindo pela intent da MainActivity
-  *  e alterar os valores dos campos para serem alterados
-  */
+    /* Responsável por receber os valores vindo pela intent da MainActivity
+    *  e alterar os valores dos campos para serem alterados
+    */
     private fun valuesFields() {
-        cpf = intent?.extras?.getString(Constants.Attributs.CPF) ?: throw IllegalStateException(getString(R.string.cpfNotFound))
-        val name = intent?.extras?.getString(Constants.Attributs.NAME) ?: throw IllegalStateException(getString(R.string.nameNotFound))
-        val sport = intent?.extras?.getString(Constants.Attributs.SPORT) ?: throw IllegalStateException(getString(R.string.sportNotFound))
-        val day = intent?.extras?.getString(Constants.Attributs.DAY) ?: throw IllegalStateException(getString(R.string.dayNotFound))
+        cpf = intent?.extras?.getString(Constants.Attributs.CPF) ?: throw IllegalStateException(
+            getString(R.string.cpfNotFound)
+        )
+        val name =
+            intent?.extras?.getString(Constants.Attributs.NAME) ?: throw IllegalStateException(
+                getString(R.string.nameNotFound)
+            )
+        val sport =
+            intent?.extras?.getString(Constants.Attributs.SPORT) ?: throw IllegalStateException(
+                getString(R.string.sportNotFound)
+            )
 
         binding.editCpf.setText(cpf)
         binding.editName.setText(name)
         binding.editSport.setText(sport)
-        binding.editDay.setText(day)
     }
 }
