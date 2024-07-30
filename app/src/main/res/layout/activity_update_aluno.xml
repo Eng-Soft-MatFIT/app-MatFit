@@ -62,14 +62,6 @@
         android:inputType="textPersonName"
         android:maxLength="40" />
 
-    <EditText
-        android:id="@+id/editDay"
-        style="@style/EditText"
-        android:gravity="center"
-        android:hint="@string/day"
-        android:inputType="datetime"
-        android:maxLength="2" />
-
     <Button
         android:id="@+id/buttonUpdate"
         style="@style/Buttons"
