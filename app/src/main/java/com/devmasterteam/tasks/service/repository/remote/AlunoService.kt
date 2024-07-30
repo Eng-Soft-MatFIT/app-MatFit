@@ -29,11 +29,11 @@ interface AlunoService {
 
     @PATCH("aluno/pagar/{cpf}")
     @FormUrlEncoded
-    fun payAluno(@Field("cpf") cpf: String): Call<Boolean>
+    fun doPaymentAluno(@Field("cpf") cpf: String): Call<Boolean>
 
     @PATCH("aluno/pagamento/{cpf}")
     @FormUrlEncoded
-    fun paymentAluno(@Field("cpf") cpf: String): Call<Boolean>
+    fun verifyPaymentAluno(@Field("cpf") cpf: String): Call<Boolean>
 
     @PUT("aluno/{cpf}")
     @FormUrlEncoded
