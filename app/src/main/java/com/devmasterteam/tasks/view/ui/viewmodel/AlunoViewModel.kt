@@ -4,20 +4,35 @@ import android.app.Application
 import android.content.Context
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.MutableLiveData
 import com.devmasterteam.tasks.R
 import com.devmasterteam.tasks.service.listener.APIListener
 import com.devmasterteam.tasks.service.model.Aluno
+import com.devmasterteam.tasks.service.model.ValidationModel
 import com.devmasterteam.tasks.service.repository.AlunoRepository
-import kotlinx.coroutines.launch
 
 class AlunoViewModel(application: Application) : AndroidViewModel(application) {
 
     // Instancia do repositorio
     private val repository = AlunoRepository(application.applicationContext)
 
+    private val _saveAluno = MutableLiveData<ValidationModel>()
+    val saveAluno: MutableLiveData<ValidationModel> = _saveAluno
+
+    private val _deleteAluno = MutableLiveData<ValidationModel>()
+    val deleteAluno: MutableLiveData<ValidationModel> = _deleteAluno
+
+    private val _listAlunos = MutableLiveData<List<Aluno>>()
+    val listAlunos: MutableLiveData<List<Aluno>> = _listAlunos
+
+    private val _aluno = MutableLiveData<Aluno>()
+    val aluno: MutableLiveData<Aluno> = _aluno
+
+    private val _alunoFailure = MutableLiveData<ValidationModel>()
+    val alunoFailure: MutableLiveData<ValidationModel> = _alunoFailure
+
     // Verifica se os campos estão preenchidos corretamente
-    fun validation(context: Context, aluno: Aluno): Boolean {
+    fun saveAluno(context: Context, aluno: Aluno): Boolean {
         return if (!validateCpf(aluno.cpf)) {
             Toast.makeText(context, R.string.textErrorCpf, Toast.LENGTH_SHORT).show()
             false
@@ -27,19 +42,54 @@ class AlunoViewModel(application: Application) : AndroidViewModel(application) {
         } else if (!validateSport(aluno.sport)) {
             Toast.makeText(context, R.string.textErrorSport, Toast.LENGTH_SHORT).show()
             false
-        } else if (!validateDay(aluno.datePayment)) {
-            Toast.makeText(context, R.string.textErrorDay, Toast.LENGTH_SHORT).show()
-            false
-//        } else if (cpfRegister(aluno.cpf)) {
-//            Toast.makeText(context, R.string.textErrorCpfExistent, Toast.LENGTH_SHORT).show()
-//            false
         } else {
-            viewModelScope.launch {
-              //  repository.save(aluno)
-                Toast.makeText(context, R.string.textSucessRegister, Toast.LENGTH_SHORT).show()
-            }
+            repository.saveAluno(aluno, object : APIListener<Boolean> {
+                override fun onSuccess(result: Boolean) {
+                    _saveAluno.value = ValidationModel()
+                }
+
+                override fun onFailure(message: String) {
+                    _saveAluno.value = ValidationModel(message)
+                }
+            })
             true
         }
+    }
+
+    fun listAllAlunos(){
+        repository.listAllAlunos( object : APIListener<List<Aluno>> {
+            override fun onSuccess(result: List<Aluno>) {
+                _listAlunos.value = result
+            }
+
+            override fun onFailure(message: String) {
+                val s = message
+            }
+        })
+    }
+
+    fun deleteAluno(cpf: String){
+        repository.deleteAluno(cpf, object : APIListener<Boolean> {
+            override fun onSuccess(result: Boolean) {
+               listAllAlunos()
+            }
+
+            override fun onFailure(message: String) {
+                _deleteAluno.value = ValidationModel(message)
+            }
+        })
+    }
+
+    fun getAluno(cpf: String){
+        repository.getAluno(cpf, object : APIListener<Aluno> {
+            override fun onSuccess(result: Aluno) {
+                _aluno.value = result
+            }
+
+            override fun onFailure(message: String) {
+                _alunoFailure.value = ValidationModel(message)
+            }
+        })
     }
 
     // Faz a validação do cpf
@@ -86,14 +136,6 @@ class AlunoViewModel(application: Application) : AndroidViewModel(application) {
         return cpf[9].code - '0'.code == digito1 && cpf[10].code - '0'.code == digito2
     }
 
-    // Verifica se o cpf a tentar cadastrar ja está sendo utilizado
-//    private fun cpfRegister(cpf: String): Boolean {
-//        return if (repository.getAluno(cpf, object : APIListener<>) == null)
-//            false
-//        else
-//            true
-//    }
-
     // Faz a validação do nome
     private fun validateName(name: String) =
         (name.isNotBlank() && name.isNotEmpty() && name.length >= 4)
@@ -101,10 +143,4 @@ class AlunoViewModel(application: Application) : AndroidViewModel(application) {
     // Faz a validação do esporte
     private fun validateSport(sport: String) =
         (sport.length >= 3 && sport.isNotBlank() && sport.isNotEmpty())
-
-    // Faz a validação do dia
-    private fun validateDay(day: String): Boolean {
-        day.replace(".", "").replace("-", "").replace(",", "")
-        return (day.toInt() in 1..31 && day.isNotEmpty() && day.isNotBlank())
-    }
 }
