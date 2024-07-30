@@ -14,9 +14,21 @@ class AlunoViewHolder(private val bind: CardModelBinding, val listener: OnAlunoL
      */
     @SuppressLint("SimpleDateFormat", "SetTextI18n")
     fun bindData(aluno: Aluno) {
+        bind.textDoCpf.text = " ${aluno.cpf}"
         bind.textDoName.text = " ${aluno.name}"
         bind.textDoSport.text = " ${aluno.sport}"
         bind.textDoDay.text = " ${aluno.datePayment}"
 
+        bind.iconEdit.setOnClickListener {
+            listener.onUpdate(aluno.cpf)
+        }
+
+        bind.iconDelete.setOnClickListener{
+            listener.onDelete(aluno.cpf)
+        }
+
+        bind.iconPayment.setOnClickListener{
+            listener.OnPayment(aluno.cpf)
+        }
     }
  }
