@@ -35,20 +35,20 @@ class AlunoRepository(context: Context) : BaseRepository(context) {
         executeCall(remote.deleteAluno(cpf), listener)
     }
 
-    fun payAluno(cpf: String, listener: APIListener<Boolean>){
+    fun doPaymentAluno(cpf: String, listener: APIListener<Boolean>){
         if (!isConnectionAvaliable()) {
             listener.onFailure(context.getString(R.string.ERROR_INTERNET_CONNECTION))
             return
         }
-        executeCall(remote.payAluno(cpf), listener)
+        executeCall(remote.doPaymentAluno(cpf), listener)
     }
 
-    fun paymentAluno(cpf: String, listener: APIListener<Boolean>){
+    fun verifyPaymentAluno(cpf: String, listener: APIListener<Boolean>){
         if (!isConnectionAvaliable()) {
             listener.onFailure(context.getString(R.string.ERROR_INTERNET_CONNECTION))
             return
         }
-        executeCall(remote.paymentAluno(cpf), listener)
+        executeCall(remote.verifyPaymentAluno(cpf), listener)
     }
 
     fun getAluno(cpf: String, listener: APIListener<Aluno>) {
