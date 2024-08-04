@@ -9,6 +9,7 @@ import retrofit2.http.HTTP
 import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.PUT
+import retrofit2.http.Path
 
 interface AlunoService {
 
@@ -17,34 +18,34 @@ interface AlunoService {
 
     @GET("aluno/{cpf}")
     @FormUrlEncoded
-    fun getAluno(@Field("cpf") cpf: String): Call<Aluno>
+    fun getAluno(@Path(value = "cpf", encoded = true) cpf: String): Call<Aluno>
 
     @POST("aluno")
     @FormUrlEncoded
-    fun saveAluno(
+   suspend fun saveAluno(
         @Field("cpf") cpf: String,
-        @Field("name") name: String,
-        @Field("sport") sport: String,
+        @Field("nome") nome: String,
+        @Field("esporte") esporte: String,
     ): Call<Boolean>
 
     @PATCH("aluno/pagar/{cpf}")
     @FormUrlEncoded
-    fun doPaymentAluno(@Field("cpf") cpf: String): Call<Boolean>
+    fun doPaymentAluno(@Path(value = "cpf", encoded = true) cpf: String): Call<Boolean>
 
     @PATCH("aluno/pagamento/{cpf}")
     @FormUrlEncoded
-    fun verifyPaymentAluno(@Field("cpf") cpf: String): Call<Boolean>
+    fun verifyPaymentAluno(@Path(value = "cpf", encoded = true) cpf: String): Call<Boolean>
 
     @PUT("aluno/{cpf}")
     @FormUrlEncoded
     fun updateAluno(
-        @Field("cpf") cpf: String,
+        @Path(value = "cpf", encoded = true) cpf: String,
         @Field("name") name: String,
         @Field("sport") sport: String,
     ): Call<Boolean>
 
     @HTTP(method = "DELETE", path = "aluno/{cpf}", hasBody = true)
     @FormUrlEncoded
-    fun deleteAluno(@Field("cpf") cpf: String): Call<Boolean>
+    fun deleteAluno(@Path(value = "cpf", encoded = true) cpf: String): Call<Boolean>
 
 }
