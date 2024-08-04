@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">MatFit</string>
 
-    <string name="ERROR_UNEXPECTED">Um erro inesperado ocorreu. Tente novamente mais tarde.</string>
+    <string name="ERROR_UNEXPECTED">Um erro inesperado ocorreu: </string>
     <string name="ERROR_LOAD_TASK">Erro ao carregar a tarefa.</string>
     <string name="ERROR_INTERNET_CONNECTION">Conexão à internet necessária para uso da applicação.</string>
 
@@ -29,6 +29,7 @@
     <string name="textErrorCpfExistent">CPF já está cadastrado!</string>
     <string name="textSucessRegister">Aluno cadastrado com sucesso!</string>
     <string name="textSucessUpdated">Aluno atualizado com sucesso!</string>
+    <string name="textSucessDeleted">Aluno deletado com sucesso!</string>
     <string name="textCardName">Aluno: </string>
     <string name="textCardCpf">CPF: </string>
     <string name="textCardSport">Esporte: </string>
@@ -43,6 +44,5 @@
     <string name="nameNotFound">name not found</string>
     <string name="sportNotFound">sport not found</string>
     <string name="dayNotFound">day not found</string>
-    <string name="unlockPhone">Desbloqueie seu celular</string>
 
 </resources>
