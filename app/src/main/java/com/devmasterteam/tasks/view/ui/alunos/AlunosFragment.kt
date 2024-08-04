@@ -17,7 +17,6 @@ import com.devmasterteam.tasks.service.listener.OnAlunoListener
 import com.devmasterteam.tasks.service.model.Aluno
 import com.devmasterteam.tasks.view.adapter.AlunoAdapter
 import com.devmasterteam.tasks.view.ui.viewmodel.AlunoViewModel
-import dev.jvitor.gerenciadordematriculas.view.UpdateAlunoActivity
 
 class AlunosFragment : Fragment() {
 
@@ -28,24 +27,20 @@ class AlunosFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, b: Bundle?): View {
 
-        viewModel = ViewModelProvider(this)[AlunoViewModel::class.java]
         binding = FragmentAlunosBinding.inflate(inflater, container, false)
+        viewModel = ViewModelProvider(this)[AlunoViewModel::class.java]
 
         // Layout
         binding.recyclerListAlunos.layoutManager = LinearLayoutManager(context)
         // Adapter
         binding.recyclerListAlunos.adapter = adapter
 
-        clickable()
-
-        viewModel.listAllAlunos()
-
         val listener = object : OnAlunoListener {
             override fun onUpdate(cpf: String) {
                 val intent = Intent(context, UpdateAlunoActivity::class.java)
                 intent.putExtra(Constants.Attributs.CPF, aluno.cpf)
-                intent.putExtra(Constants.Attributs.NAME, aluno.name)
-                intent.putExtra(Constants.Attributs.SPORT, aluno.sport)
+                intent.putExtra(Constants.Attributs.NAME, aluno.nome)
+                intent.putExtra(Constants.Attributs.SPORT, aluno.esporte)
                 startActivity(intent)
             }
 
@@ -55,7 +50,7 @@ class AlunosFragment : Fragment() {
                     .setMessage(getString(R.string.textConfirmationDelete))
                     .setPositiveButton(getString(R.string.yes)) { dialog, which ->
                         viewModel.deleteAluno(cpf)
-                        viewModel.listAllAlunos()
+                        //viewModel.listAllAlunos()
                     }
                     .setNegativeButton(getString(R.string.cancel)) { dialog, which -> null }
                     .create()
@@ -70,6 +65,10 @@ class AlunosFragment : Fragment() {
 //      Responsável por passar o listener para o adapter
         adapter.attachListener(listener)
 
+        viewModel.listAllAlunos()
+
+        clickable()
+
         // Cria os observadores
         observe()
 
@@ -83,15 +82,15 @@ class AlunosFragment : Fragment() {
         }
         viewModel.deleteAluno.observe(viewLifecycleOwner) {
             if (it.status())
-                Toast.makeText(context, R.string.textConfirmationDelete, Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, R.string.textSucessDeleted, Toast.LENGTH_SHORT).show()
             else
                 Toast.makeText(context, it.message(), Toast.LENGTH_SHORT).show()
         }
-        viewModel.aluno.observe(viewLifecycleOwner) {
+        viewModel.getAluno.observe(viewLifecycleOwner) {
             aluno = it
         }
-        viewModel.alunoFailure.observe(viewLifecycleOwner){
-            if(!it.status()) Toast.makeText(context, it.message(), Toast.LENGTH_SHORT).show()
+        viewModel.alunoFailure.observe(viewLifecycleOwner) {
+            if (!it.status()) Toast.makeText(context, it.message(), Toast.LENGTH_SHORT).show()
         }
     }
 
