@@ -2,62 +2,59 @@ package com.devmasterteam.tasks.view.ui.viewmodel
 
 import android.app.Application
 import android.content.Context
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.devmasterteam.tasks.R
 import com.devmasterteam.tasks.service.listener.APIListener
 import com.devmasterteam.tasks.service.model.Aluno
 import com.devmasterteam.tasks.service.model.ValidationModel
 import com.devmasterteam.tasks.service.repository.AlunoRepository
+import com.devmasterteam.tasks.service.repository.remote.AlunoService
+import kotlinx.coroutines.launch
 
 class AlunoViewModel(application: Application) : AndroidViewModel(application) {
 
     // Instancia do repositorio
-    private val repository = AlunoRepository(application.applicationContext)
+   private val repository = AlunoRepository(application.applicationContext)
+
+   // private val repository1: AlunoRepository = AlunoRepository(AlunoService.create())
 
     private val _saveAluno = MutableLiveData<ValidationModel>()
-    val saveAluno: MutableLiveData<ValidationModel> = _saveAluno
+    val saveAluno: LiveData<ValidationModel> = _saveAluno
 
     private val _deleteAluno = MutableLiveData<ValidationModel>()
-    val deleteAluno: MutableLiveData<ValidationModel> = _deleteAluno
+    val deleteAluno: LiveData<ValidationModel> = _deleteAluno
 
     private val _listAlunos = MutableLiveData<List<Aluno>>()
-    val listAlunos: MutableLiveData<List<Aluno>> = _listAlunos
+    val listAlunos: LiveData<List<Aluno>> = _listAlunos
 
-    private val _aluno = MutableLiveData<Aluno>()
-    val aluno: MutableLiveData<Aluno> = _aluno
+    private val _getAluno = MutableLiveData<Aluno>()
+    val getAluno: LiveData<Aluno> = _getAluno
 
     private val _alunoFailure = MutableLiveData<ValidationModel>()
-    val alunoFailure: MutableLiveData<ValidationModel> = _alunoFailure
+    val alunoFailure: LiveData<ValidationModel> = _alunoFailure
 
-    // Verifica se os campos estão preenchidos corretamente
-    fun saveAluno(context: Context, aluno: Aluno): Boolean {
-        return if (!validateCpf(aluno.cpf)) {
-            Toast.makeText(context, R.string.textErrorCpf, Toast.LENGTH_SHORT).show()
-            false
-        } else if (!validateName(aluno.name)) {
-            Toast.makeText(context, R.string.textErrorName, Toast.LENGTH_SHORT).show()
-            false
-        } else if (!validateSport(aluno.sport)) {
-            Toast.makeText(context, R.string.textErrorSport, Toast.LENGTH_SHORT).show()
-            false
-        } else {
-            repository.saveAluno(aluno, object : APIListener<Boolean> {
-                override fun onSuccess(result: Boolean) {
-                    _saveAluno.value = ValidationModel()
-                }
 
-                override fun onFailure(message: String) {
-                    _saveAluno.value = ValidationModel(message)
-                }
-            })
-            true
-        }
+    suspend fun save(aluno: Aluno) {
+        repository.saveAluno(aluno, object : APIListener<Boolean> {
+            override fun onSuccess(result: Boolean) {
+                Log.d("AlunoViewModel", "onSuccess: Aluno salvo com sucesso")
+                _saveAluno.value = ValidationModel()
+            }
+
+            override fun onFailure(message: String) {
+                Log.d("AlunoViewModel", "onFailure: $message")
+                _saveAluno.value = ValidationModel(message)
+            }
+        })
     }
 
-    fun listAllAlunos(){
-        repository.listAllAlunos( object : APIListener<List<Aluno>> {
+    fun listAllAlunos() {
+        repository.listAllAlunos(object : APIListener<List<Aluno>> {
             override fun onSuccess(result: List<Aluno>) {
                 _listAlunos.value = result
             }
@@ -68,10 +65,11 @@ class AlunoViewModel(application: Application) : AndroidViewModel(application) {
         })
     }
 
-    fun deleteAluno(cpf: String){
+    fun deleteAluno(cpf: String) {
         repository.deleteAluno(cpf, object : APIListener<Boolean> {
             override fun onSuccess(result: Boolean) {
-               listAllAlunos()
+                _deleteAluno.value = ValidationModel()
+                listAllAlunos()
             }
 
             override fun onFailure(message: String) {
@@ -80,10 +78,10 @@ class AlunoViewModel(application: Application) : AndroidViewModel(application) {
         })
     }
 
-    fun getAluno(cpf: String){
+    fun getAluno(cpf: String) {
         repository.getAluno(cpf, object : APIListener<Aluno> {
             override fun onSuccess(result: Aluno) {
-                _aluno.value = result
+                _getAluno.value = result
             }
 
             override fun onFailure(message: String) {
