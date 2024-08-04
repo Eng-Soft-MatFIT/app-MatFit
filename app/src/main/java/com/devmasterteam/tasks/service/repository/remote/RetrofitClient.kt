@@ -1,7 +1,7 @@
 package com.devmasterteam.tasks.service.repository.remote
 
-import com.devmasterteam.tasks.service.constants.Constants
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -9,24 +9,34 @@ class RetrofitClient private constructor() {
     companion object {
 
         private lateinit var INSTANCE: Retrofit
-        private var token: String = ""
-        private var personKey: String = ""
-        private const val URL = "https://mat-fit.up.railway.app/"
+        private const val URL = "https://matfit.up.railway.app/"
 
         private fun getRetrofitInstance(): Retrofit {
             val httpClient = OkHttpClient.Builder()
-            httpClient.addInterceptor { chain ->
-                val request = chain.request()
-                    .newBuilder()
-                    .build()
-                chain.proceed(request)
-            }
+//            httpClient.addInterceptor { chain ->
+//                val request = chain.request()
+//                    .newBuilder()
+//                    .addHeader("Content-Type", "application/x-www-form-urlencoded")
+//                    .build()
+//                chain.proceed(request)
+//            }
+
+            val client = OkHttpClient.Builder()
+            client.addInterceptor(HttpLoggingInterceptor().apply {
+                level = HttpLoggingInterceptor.Level.BODY
+            }).build()
+
+//            val logging = HttpLoggingInterceptor()
+//            logging.setLevel(HttpLoggingInterceptor.Level.BODY)
+//            val client = OkHttpClient.Builder()
+//                .addInterceptor(logging)
+//                .build()
 
             if (!::INSTANCE.isInitialized) {
                 synchronized(RetrofitClient::class) {
                     INSTANCE = Retrofit.Builder()
                         .baseUrl(URL)
-                        .client(httpClient.build())
+                        .client(client.build())
                         .addConverterFactory(GsonConverterFactory.create())
                         .build()
                 }
@@ -34,7 +44,7 @@ class RetrofitClient private constructor() {
             return INSTANCE
         }
 
-        fun <T> getService(serviceClass: Class<T>) : T {
+        fun <T> getService(serviceClass: Class<T>): T {
             return getRetrofitInstance().create(serviceClass)
         }
     }
