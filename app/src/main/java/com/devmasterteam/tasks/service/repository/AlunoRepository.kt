@@ -1,6 +1,7 @@
 package com.devmasterteam.tasks.service.repository
 
 import android.content.Context
+import android.util.Log
 import com.devmasterteam.tasks.R
 import com.devmasterteam.tasks.service.listener.APIListener
 import com.devmasterteam.tasks.service.model.Aluno
@@ -11,12 +12,13 @@ class AlunoRepository(context: Context) : BaseRepository(context) {
 
     private val remote = RetrofitClient.getService(AlunoService::class.java)
 
-    fun saveAluno(aluno: Aluno, listener: APIListener<Boolean>) {
+    suspend fun saveAluno(aluno: Aluno, listener: APIListener<Boolean>) {
         if (!isConnectionAvaliable()) {
             listener.onFailure(context.getString(R.string.ERROR_INTERNET_CONNECTION))
             return
         }
-        executeCall(remote.saveAluno(aluno.cpf, aluno.name, aluno.sport), listener)
+        Log.d("AlunoRepository", "SaveAluno")
+        executeCall(remote.saveAluno(aluno.cpf, aluno.nome, aluno.esporte), listener)
     }
 
     fun updateAluno(aluno: Aluno, listener: APIListener<Boolean>) {
@@ -24,10 +26,10 @@ class AlunoRepository(context: Context) : BaseRepository(context) {
             listener.onFailure(context.getString(R.string.ERROR_INTERNET_CONNECTION))
             return
         }
-        executeCall(remote.updateAluno(aluno.cpf, aluno.name, aluno.sport), listener)
+        executeCall(remote.updateAluno(aluno.cpf, aluno.nome, aluno.esporte), listener)
     }
 
-    fun deleteAluno(cpf: String ,listener: APIListener<Boolean>){
+    fun deleteAluno(cpf: String, listener: APIListener<Boolean>) {
         if (!isConnectionAvaliable()) {
             listener.onFailure(context.getString(R.string.ERROR_INTERNET_CONNECTION))
             return
@@ -35,7 +37,7 @@ class AlunoRepository(context: Context) : BaseRepository(context) {
         executeCall(remote.deleteAluno(cpf), listener)
     }
 
-    fun doPaymentAluno(cpf: String, listener: APIListener<Boolean>){
+    fun doPaymentAluno(cpf: String, listener: APIListener<Boolean>) {
         if (!isConnectionAvaliable()) {
             listener.onFailure(context.getString(R.string.ERROR_INTERNET_CONNECTION))
             return
@@ -43,7 +45,7 @@ class AlunoRepository(context: Context) : BaseRepository(context) {
         executeCall(remote.doPaymentAluno(cpf), listener)
     }
 
-    fun verifyPaymentAluno(cpf: String, listener: APIListener<Boolean>){
+    fun verifyPaymentAluno(cpf: String, listener: APIListener<Boolean>) {
         if (!isConnectionAvaliable()) {
             listener.onFailure(context.getString(R.string.ERROR_INTERNET_CONNECTION))
             return
