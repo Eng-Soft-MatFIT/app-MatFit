@@ -8,14 +8,14 @@ data class Aluno(
     val cpf: String,
 
     @SerializedName("nome")
-    val name: String,
+    val nome: String,
 
     @SerializedName("esporte")
-    val sport: String,
+    val esporte: String,
 
     @SerializedName("dataPagamento")
-    val datePayment: String,
+    var dataPagamento: String = "",
 
     @SerializedName("pagamentoAtrasado")
-    val latePayment: Boolean = false,
+    var pagamentoAtrasado: Boolean = false,
 )
