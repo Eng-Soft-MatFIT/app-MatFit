@@ -1,17 +1,20 @@
-package dev.jvitor.gerenciadordematriculas.view
+package com.devmasterteam.tasks.view.ui.alunos
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.devmasterteam.tasks.R
 import com.devmasterteam.tasks.databinding.ActivityUpdateAlunoBinding
 import com.devmasterteam.tasks.service.constants.Constants
 import com.devmasterteam.tasks.service.model.Aluno
 import com.devmasterteam.tasks.view.ui.viewmodel.AlunoViewModel
-import java.time.LocalDate
+import kotlinx.coroutines.launch
 
 class UpdateAlunoActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUpdateAlunoBinding
@@ -50,13 +53,14 @@ class UpdateAlunoActivity : AppCompatActivity() {
 
     // Responsável por atualizar informações do aluno
     private fun doUpdate() {
-        val name = binding.editName.text.toString()
-        val sport = binding.editSport.text.toString()
-     // todo - diferenciar salvar e atualizar
-        if (viewModel.saveAluno(applicationContext.applicationContext,
-                Aluno(cpf, name, sport,  "${LocalDate.now().plusMonths(1)}")))
-            finish()
-        else return
+      lifecycleScope.launch {
+          repeatOnLifecycle(Lifecycle.State.STARTED) {
+              val name = binding.editName.text.toString()
+              val sport = binding.editSport.text.toString()
+              // todo - diferenciar salvar e atualizar
+              viewModel.save(Aluno(cpf, name, sport))
+          }
+      }
     }
 
 
